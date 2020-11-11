@@ -1,5 +1,5 @@
 # decides weight of 3d lattice in the linear combination of images
-HAND_DRAWN = 0.35
+HAND_DRAWN = 0.1
 
 # odd variable that decides the window size for gaussian blurring and convolution
 SKETCH_DENSITY = 23

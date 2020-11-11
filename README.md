@@ -26,7 +26,7 @@
 ![dolphin-2-result](assets/dolphin-2-result.png)
 ![flower-2-result](assets/flower-2-result.png)
 ![flower-rose-result](assets/flower-rose-result.png)
-
+![swiss-3-result](assets/swiss-3-result.jpg)
 
 ## Running it On Your Machine
 
