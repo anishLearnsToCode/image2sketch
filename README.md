@@ -20,6 +20,8 @@
 ## Novel Method
 
 ## A Few Results
+![lenna-result](assets/lenna-results.png)
+![swiss-1-results](assets/swiss-1-results.png)
 
 ## Running it On Your Machine
 
