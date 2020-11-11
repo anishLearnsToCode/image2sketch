@@ -1,0 +1,7 @@
+.idea
+venv
+out
+dist
+data
+results
+notebook/.ipynb_checkpoints
