@@ -5,11 +5,11 @@ from src.pencil_sketch import PencilSketch
 from src.control_parameters import *
 
 
-I = cv2.imread('../data/switzerland/swiss-1.jpg')
-IMAGE_NAME = 'swiss-1'
+I = cv2.imread('../data/switzerland/swiss-2.jpg')
+IMAGE_NAME = 'swiss-2'
 CURRENT_BOUNDS = BOUNDS_NORMAL
 result_path = os.path.join(RESULTS_DIR, IMAGE_NAME, get_params_dir_name(), bounds_dir_name(CURRENT_BOUNDS), VERTEX_COLORING, 'result') + PNG
-concat_path = os.path.join(RESULTS_DIR, IMAGE_NAME, get_params_dir_name(), bounds_dir_name(CURRENT_BOUNDS), VERTEX_COLORING, 'result-concat') + PNG
+concat_path = os.path.join(RESULTS_DIR, IMAGE_NAME, get_params_dir_name(), bounds_dir_name(CURRENT_BOUNDS), VERTEX_COLORING, f'{IMAGE_NAME}-result') + PNG
 L3_PATH = os.path.join(RESULTS_DIR, IMAGE_NAME, get_params_dir_name(), bounds_dir_name(CURRENT_BOUNDS), VERTEX_COLORING, 'lattice-2') + JPG
 
 create_vertex_shaded_image(I, image_name=IMAGE_NAME, bounds=CURRENT_BOUNDS)
@@ -23,7 +23,7 @@ cv2.imshow('novel', R)
 cv2.waitKey(0)
 cv2.imwrite(result_path, R)
 
-R = np.concatenate((I, R), axis=1)
-cv2.imshow('concat', R)
-cv2.waitKey(0)
+# R = np.concatenate((I, R), axis=1)
+# cv2.imshow('concat', R)
+# cv2.waitKey(0)
 cv2.imwrite(concat_path, R)
