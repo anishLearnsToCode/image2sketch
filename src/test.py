@@ -5,11 +5,13 @@ from src.pencil_sketch import PencilSketch
 from src.control_parameters import *
 
 
-I = cv2.imread('../data/switzerland/swiss-2.jpg')
-IMAGE_NAME = 'swiss-2'
+I = cv2.imread('../data/dolphin-2.jpg')
+IMAGE_NAME = 'dolphin-2'
 CURRENT_BOUNDS = BOUNDS_NORMAL
+ASSETS_DIR = os.path.abspath('../assets')
+print(ASSETS_DIR)
 result_path = os.path.join(RESULTS_DIR, IMAGE_NAME, get_params_dir_name(), bounds_dir_name(CURRENT_BOUNDS), VERTEX_COLORING, 'result') + PNG
-concat_path = os.path.join(RESULTS_DIR, IMAGE_NAME, get_params_dir_name(), bounds_dir_name(CURRENT_BOUNDS), VERTEX_COLORING, f'{IMAGE_NAME}-result') + PNG
+concat_path = os.path.join(ASSETS_DIR, f'{IMAGE_NAME}-result') + PNG
 L3_PATH = os.path.join(RESULTS_DIR, IMAGE_NAME, get_params_dir_name(), bounds_dir_name(CURRENT_BOUNDS), VERTEX_COLORING, 'lattice-2') + JPG
 
 create_vertex_shaded_image(I, image_name=IMAGE_NAME, bounds=CURRENT_BOUNDS)

@@ -20,9 +20,10 @@
 ## Novel Method
 
 ## A Few Results
-![lenna-result](assets/lenna-results.png)
+![butterfly-result](assets/butterfly-result.png)
 ![swiss-1-results](assets/swiss-1-results.png)
 ![swiss-2-result](assets/swiss-2.png) 
+![dolphin-2-result](assets/dolphin-2-result.png)
 
 ## Running it On Your Machine
 
