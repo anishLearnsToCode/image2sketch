@@ -1,10 +1,9 @@
 # Image 2 Sketch
 
 📓 [Explanation Notebook with Code](notebook/novel-method-explanation.ipynb) |
-⭐ [Results]()
+⭐ [Results](#a-few-results)
 
-
-![lenna-example](assets/lenna-example.PNG)
+![lenna-example](assets/lenna-results.png)
 
 ## 📖 Overview
 1. [Introduction]()
