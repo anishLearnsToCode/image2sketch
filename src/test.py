@@ -23,7 +23,7 @@ cv2.imshow('novel', R)
 cv2.waitKey(0)
 cv2.imwrite(result_path, R)
 
-# R = np.concatenate((I, R), axis=1)
+R = np.concatenate((I, R), axis=1)
 # cv2.imshow('concat', R)
 # cv2.waitKey(0)
 cv2.imwrite(concat_path, R)
