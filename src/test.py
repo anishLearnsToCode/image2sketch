@@ -5,8 +5,8 @@ from src.pencil_sketch import PencilSketch
 from src.control_parameters import *
 
 
-I = cv2.imread('../data/lenna.png')
-IMAGE_NAME = 'lenna'
+I = cv2.imread('../data/lenna-n.jpg')
+IMAGE_NAME = 'lenna-n'
 CURRENT_BOUNDS = BOUNDS_NORMAL
 result_path = os.path.join(RESULTS_DIR, IMAGE_NAME, get_params_dir_name(), bounds_dir_name(CURRENT_BOUNDS), VERTEX_COLORING, 'result') + PNG
 L3_PATH = os.path.join(RESULTS_DIR, IMAGE_NAME, get_params_dir_name(), bounds_dir_name(CURRENT_BOUNDS), VERTEX_COLORING, 'lattice-2') + JPG

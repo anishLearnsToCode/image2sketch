@@ -30,3 +30,6 @@
 1. [Python 3](https://www.python.org/)
 1. [Git](https://git-scm.com/)
 1. [Graph Theory and Its Applications to Image Segmentation ~IEEE](https://ieeexplore.ieee.org/document/8389737)
+1. [Image Sketch Online](https://pencilsketch.imageonline.co/index.php)
+1. [Photofunia Sketch Effect](https://photofunia.com/effects/sketch)
+1. [convertimage.net](https://convertimage.net/online-photo-effects/online-photo-drawing-sketch.asp?i=20201111-110144-urqmr)
