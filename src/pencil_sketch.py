@@ -1,5 +1,5 @@
 import cv2
-from src.control_parameters import *
+from src.control_parameters import SKETCH_DENSITY
 
 
 class PencilSketch:
@@ -31,7 +31,6 @@ class PencilSketch:
         blur_factor = (SKETCH_DENSITY, ) * 2
         img_gray = cv2.cvtColor(self.I, cv2.COLOR_RGB2GRAY)
         img_blur = cv2.GaussianBlur(img_gray, blur_factor, 0, 0)
-        # cv2.imshow('im blur', img_blur)
         img_blend = cv2.divide(img_gray, img_blur, scale=256)
 
         # if available, blend with background canvas

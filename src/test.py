@@ -5,8 +5,8 @@ from src.pencil_sketch import PencilSketch
 from src.control_parameters import *
 
 
-I = cv2.imread('../data/flower-rose.jpeg')
-IMAGE_NAME = 'flower-rose'
+I = cv2.imread('../data/switzerland/swiss-3.jpg')
+IMAGE_NAME = 'swiss-3'
 CURRENT_BOUNDS = BOUNDS_NORMAL
 ASSETS_DIR = os.path.abspath('../assets')
 result_path = os.path.join(RESULTS_DIR, IMAGE_NAME, get_params_dir_name(), bounds_dir_name(CURRENT_BOUNDS), VERTEX_COLORING, 'result') + PNG
@@ -27,4 +27,4 @@ cv2.imwrite(result_path, R)
 R = np.concatenate((I, R), axis=1)
 # cv2.imshow('concat', R)
 # cv2.waitKey(0)
-cv2.imwrite(concat_path, R)
+# cv2.imwrite(concat_path, R)

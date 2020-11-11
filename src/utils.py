@@ -1,13 +1,13 @@
-import cv2
-import numpy as np
-from math import pi
-from src.image_graph.simple_graph import SimpleGraph
+import concurrent.futures
 import os
 import pickle
-import concurrent.futures
-from src.pencil_sketch import PencilSketch
-from src.control_parameters import *
+from math import pi
 
+import cv2
+import numpy as np
+
+from src.image_graph.simple_graph import SimpleGraph
+from src.pencil_sketch import PencilSketch
 
 # constants
 SQRT_2PI = np.sqrt(2 * pi)

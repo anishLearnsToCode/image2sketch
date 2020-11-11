@@ -39,3 +39,4 @@
 1. [Image Sketch Online](https://pencilsketch.imageonline.co/index.php)
 1. [Photofunia Sketch Effect](https://photofunia.com/effects/sketch)
 1. [convertimage.net](https://convertimage.net/online-photo-effects/online-photo-drawing-sketch.asp?i=20201111-110144-urqmr)
+1. [Convert Image to GrayScale ~KD Nuggets](https://www.kdnuggets.com/2019/12/convert-rgb-image-grayscale.html#:~:text=An%20intuitive%20way%20to%20convert,into%20a%20reasonable%20gray%20approximation.)
