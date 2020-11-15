@@ -28,14 +28,6 @@ def print_success(message: str, top_bar=True, bottom_bar=True):
     if bottom_bar: print('-' * 20)
 
 
-def video_data(V, video_name: str, bounds=BOUNDS_NORMAL) -> tuple:
-    """:param V is the video stream imported using opencv (cv2), :param video_name is the string name of the video dir
-    :param bounds are the bounds used during lattice computation. This method :returns a tuple with video_directory
-    and frame_numbers in video"""
-    video_dir = os.path.join(RESULTS_DIR, video_name, get_params_dir_name(), bounds_dir_name(bounds))
-    return frame_count(V), video_dir
-
-
 def get_params_dir_name():
     return f'{MU}-{SIGMA_FACTOR}-{A}'
 
@@ -71,9 +63,9 @@ def get_obj_from_dir(path: str):
     return pickle.load(open(path, 'rb'))
 
 
-def inverse_gaussian(mu, sigma, A, y) -> np.ndarray:
+def inverse_gaussian(mu, sigma, Amp, y) -> np.ndarray:
     """:returns x (input) given output of gaussian function y"""
-    return np.nan_to_num(sigma * np.sqrt(-2 * np.log(y * sigma * SQRT_2PI / A))) + mu
+    return np.nan_to_num(sigma * np.sqrt(-2 * np.log(y * sigma * SQRT_2PI / Amp))) + mu
 
 
 def deviation_vector(gaussian_inv, center_pos, surrounding_pos) -> np.ndarray:
@@ -166,7 +158,7 @@ def compute_and_save_lattices_and_components(I: np.ndarray, image_name: str, bou
     compute_and_save_lattices(I, image_name, bounds)
 
     if not os.path.isfile(components_path):
-        components = get_components(get_obj_from_dir(lattices_path))
+        components = get_components(get_obj_from_dir(lattices_path), lattices_reduction_bounds=(-1, float('inf')))
         save_object_in_dir(components, components_path)
     print(f'computed components for {image_name} with {bounds}')
 
@@ -183,6 +175,17 @@ def compute_and_save_lattice_vertex_shaded_images(I: np.ndarray, image_name: str
     L = [lattice_vertex_shading_image(lattice, I) for lattice in lattices]
     make_dir_if_absent(vertex_dir)
     [cv2.imwrite(os.path.join(vertex_dir, f'gaussian-{i}') + PNG, l) for i, l in enumerate(L)]
+
+
+def compute_and_save_lattice_color_images(I, image_name: str, bounds=BOUNDS_NORMAL):
+    compute_and_save_lattices_and_components(I, image_name, bounds)
+    image_dir= os.path.join(RESULTS_DIR, image_name, get_params_dir_name(), bounds_dir_name(bounds))
+    lattice_color_dir = os.path.join(image_dir, LATTICE_COLORING)
+    make_dirs_for_full_path_if_absent(RESULTS_DIR, image_name, get_params_dir_name(), bounds_dir_name(bounds), LATTICE_COLORING)
+    components_path = os.path.join(image_dir, COMPONENTS_PICKLE)
+    frame_components = get_obj_from_dir(components_path)
+    L = [lattice_image(components, I) for components in frame_components]
+    [cv2.imwrite(os.path.join(lattice_color_dir, f'lattice-{i}') + PNG, l) for i, l in enumerate(L)]
 
 
 def random_color() -> np.ndarray:
@@ -226,14 +229,30 @@ def lattice_vertex_shading_image(lattice: DirectedGraph, I: np.ndarray):
     return L
 
 
-def get_linear_combination(I: np.ndarray, image_name: str, weights: tuple, bounds=BOUNDS_NORMAL) -> tuple:
+def get_linear_combination(I: np.ndarray, image_name: str, weights: tuple, bounds=BOUNDS_NORMAL, brightness=30) -> tuple:
     mask_weight = 1 - sum(weights)
-    S = np.array(PencilSketch(I, bg_gray='').render(), dtype=np.int)
+    S = increase_brightness(np.array(PencilSketch(I, bg_gray='').render(), dtype=np.uint8), brightness)
     vertex_dir = os.path.join(RESULTS_DIR, image_name, get_params_dir_name(), bounds_dir_name(bounds), VERTEX_COLORING)
     L = [cv2.imread(os.path.join(vertex_dir, f'gaussian-{i}') + PNG) for i in range(3)]
-    return np.array(S, dtype=np.uint8), np.array(sum(weight * l for weight, l in zip(L, weights)) + S * mask_weight, dtype=np.uint8)
+    return S, np.array(sum(weight * l for weight, l in zip(L, weights)) + S * mask_weight, dtype=np.uint8)
 
 
-def generate_pencil_sketch_of_image(I: np.ndarray, image_name: str, weights: tuple, bounds=BOUNDS_NORMAL):
+def generate_pencil_sketch_of_image(I: np.ndarray, image_name: str, weights: tuple, bounds=BOUNDS_NORMAL, brightness=30):
     compute_and_save_lattice_vertex_shaded_images(I, image_name, bounds)
-    return get_linear_combination(I, image_name, weights, bounds)
+    return get_linear_combination(I, image_name, weights, bounds, brightness)
+
+
+def increase_brightness(img, value=30):
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+
+    lim = 255 - value
+    v[v > lim] = 255
+    v[v <= lim] += value
+
+    final_hsv = cv2.merge((h, s, v))
+    img = cv2.cvtColor(final_hsv, cv2.COLOR_HSV2BGR)
+    return img
+
+def dodgeV2(image, mask):
+    return cv2.divide(image, 255 - mask, scale=256)
