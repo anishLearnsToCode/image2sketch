@@ -254,5 +254,6 @@ def increase_brightness(img, value=30):
     img = cv2.cvtColor(final_hsv, cv2.COLOR_HSV2BGR)
     return img
 
+
 def dodgeV2(image, mask):
     return cv2.divide(image, 255 - mask, scale=256)
