@@ -229,20 +229,24 @@ def lattice_vertex_shading_image(lattice: DirectedGraph, I: np.ndarray):
     return L
 
 
-def get_linear_combination(I: np.ndarray, image_name: str, weights: tuple, bounds=BOUNDS_NORMAL, brightness=30) -> tuple:
+def get_linear_combination(I: np.ndarray, image_name: str, weights: tuple, bounds=BOUNDS_NORMAL, brightness=0) -> tuple:
     mask_weight = 1 - sum(weights)
-    S = increase_brightness(np.array(PencilSketch(I, bg_gray='').render(), dtype=np.uint8), brightness)
+    # S = increase_brightness(np.array(PencilSketch(I, bg_gray='').render(), dtype=np.uint8), brightness)
+    S = np.array(PencilSketch(I, bg_gray='').render(), dtype=np.uint8)
     vertex_dir = os.path.join(RESULTS_DIR, image_name, get_params_dir_name(), bounds_dir_name(bounds), VERTEX_COLORING)
     L = [cv2.imread(os.path.join(vertex_dir, f'gaussian-{i}') + PNG) for i in range(3)]
     return S, np.array(sum(weight * l for weight, l in zip(L, weights)) + S * mask_weight, dtype=np.uint8)
 
 
-def generate_pencil_sketch_of_image(I: np.ndarray, image_name: str, weights: tuple, bounds=BOUNDS_NORMAL, brightness=30):
+def generate_pencil_sketch_of_image(I: np.ndarray, image_name: str, weights: tuple, bounds=BOUNDS_NORMAL, brightness=0):
     compute_and_save_lattice_vertex_shaded_images(I, image_name, bounds)
     return get_linear_combination(I, image_name, weights, bounds, brightness)
 
 
-def increase_brightness(img, value=30):
+def increase_brightness(img, value=0):
+    if value == 0:
+        return img
+
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     h, s, v = cv2.split(hsv)
 

@@ -2,10 +2,10 @@ from src.utils import *
 from src.control_parameters import *
 
 
-I = cv2.imread('../data/bridge.jpeg')
-IMAGE_NAME = 'bridge'
-CURRENT_BOUNDS = BOUNDS_6
-W = (0.2, 0.05, HAND_DRAWN)
+I = cv2.imread('../data/lenna.png')
+IMAGE_NAME = 'lenna'
+CURRENT_BOUNDS = BOUNDS_4
+W = (0, 0, 0)
 
 ASSETS_DIR = os.path.abspath('../assets')
 concat_path = os.path.join(ASSETS_DIR, f'{IMAGE_NAME}-result') + JPG
