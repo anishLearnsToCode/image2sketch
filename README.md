@@ -1,6 +1,6 @@
 # Image 2 Sketch
 
-📃 [Report](asssets/image-2-sketch-report.pdf)|
+📃 [Report](assets/image-2-sketch-report.pdf) |
 📓 [Explanation Notebook with Code](notebook/novel-method-explanation.ipynb) |
 ⭐ [Results](#a-few-results)
 
