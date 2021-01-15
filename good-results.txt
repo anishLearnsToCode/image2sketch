@@ -1,0 +1,2 @@
+lenna BOUNDS_4 (0.05, 0.1, 0.4)
+butterfly BOUNDS_4 (0, 0.3, 0.1)
